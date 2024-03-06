@@ -12,7 +12,7 @@ public:
         ListNode*slow=head; ListNode*fast=head;
         while(fast!=NULL && fast->next!=NULL)
         {
-            slow=slow->next;
+            slow=slow->next;      // tortosie and hare algorithm
             fast=fast->next->next;
             if(slow==fast) return true;
         }  
