@@ -1,26 +1,26 @@
 class Solution {
-public:
-    int countCompleteSubarrays(vector<int>& nums) {
+public:    
+    int function(vector<int>&nums,int k)
+    {
         unordered_map<int,int>mp;
-        for(auto i:nums) mp[i]++; 
-        int k=mp.size();
-        mp.clear();
-        int c=0;
-        for(int i=0;i<nums.size();i++)
+        int i=0,j=0,ans=0; int n=nums.size();
+        while(j<n)
         {
-            mp[nums[i]]++;
-            for(int j=i;j<nums.size();j++)  
+            mp[nums[j]]++;
+            while(mp.size()>k&&i<=j)
             {
-                mp[nums[j]]++; 
-                   if(mp.size()==k)
-                   {
-                       c++;
-                   }
-                
-            }  
-                   mp.clear();
-
-            }  
-                   return c;
+                mp[nums[i]]--;
+                if(mp[nums[i]]==0) mp.erase(nums[i]);  
+                i++;
+            }   
+            ans+=(j-i+1); 
+            j++;
+        }  
+        return ans;
+    }
+    int subarraysWithKDistinct(vector<int>& nums, int k) {   
+        int ans=function(nums,k) - function(nums,k-1); 
+        return ans;
+        
     }
 };
